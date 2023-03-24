@@ -1,0 +1,1 @@
+export const realFeedData = ["this is sample real data showing on ui", "2. data from another country", "3rd country data"];

@@ -1,0 +1,97 @@
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  border: 10px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid #383636; /* Black */
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+.form-details-container {
+  display: flex;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: 5%;
+  row-gap: 10px;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 200;
+    src: url(https://fonts.gstatic.com/s/sourcesanspro/v14/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlxdr.ttf) format('truetype');
+}
+/* webcam  */
+.form-container .webcam-container
+{
+  text-align: center;
+  margin:0 auto;
+}
+.form-container .webcam-container .webcam-btn
+{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+
+#login {
+  display: flex;
+  flex-direction: column;
+  background: #EEE5E9AA;
+  border-radius: 15px;
+  width: 50%;
+  margin: 5%;
+  padding: 5%;
+}
+
+#login .group {
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+#login input {
+
+  width: calc(100% - 5px);
+  border-radius: 10px;
+  height: 30px;
+  font-size: 13px;
+  border: 0;
+  padding: 1px;
+  text-align: center;
+  color: black;
+}
+
+#login button {
+  /* border-radius: 10px;
+  background: #7C7C7CAA;
+  font-size: 20px;
+  width: 100%;
+  border: 0;
+  padding: 5px; */
+
+  border-radius: 10px;
+  background: #3D8C95;
+  font-size: 15px;
+  width: 100%;
+  border: 0;
+  height: 30px;
+
+}
+
+.webcam-img video{
+  width: 100%;
+}
