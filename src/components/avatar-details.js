@@ -14,7 +14,7 @@ import "../assets/Avatar.css";
 const AvatarDetails = props => {
   const { blockChain } = props;
   const latestUser =  blockChain.updated? blockChain : blockChain.allUsers[0] ;
-  const { name, email, designation, qrCode, avatarImg} = latestUser || blockChain;
+  const { name, email, designation, qrCode, photo} = latestUser || blockChain;
 
 
   return (
@@ -24,7 +24,7 @@ const AvatarDetails = props => {
           <MDBCard className="testimonial-card">
             <div className="avatar mx-auto bg-white">
               <MDBCardImage
-                src={avatarImg}
+                src={`data:image/png;base64,${photo}`}
                 className="rounded-circle img-fluid"
               />
             </div>
@@ -34,7 +34,7 @@ const AvatarDetails = props => {
                 <div className="row g-0">
                   <div className="col-md-4">
                     <img
-                      src={qrCode}
+                      src={`data:image/png;base64,${qrCode}`}
                       alt="QR Code"
                       className="img-fluid rounded-start"
                     />

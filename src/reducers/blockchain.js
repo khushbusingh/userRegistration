@@ -1,19 +1,19 @@
 import {
   SET_IMAGE,
-  SET_FORM_DATA,
+  REGISTER_DATA,
   ALL_USERS,
   SET_SLIDE_DATA
 } from "../actions/types";
 
-import qrCode from "../images/qrcode-sample.png";
-import avatarImg from "../images/avatar.png";
+
+import { sampleBase64Img, sampleBaseQrCode } from "../constants/constData";
 
 const initialState = {
   name: "xyz", 
   email: "xyz@xyz.com", 
   designation: "xyz", 
-  qrCode: qrCode,
-  avatarImg: avatarImg,
+  qrCode: sampleBaseQrCode,
+  photo: sampleBase64Img,
   allUsers: [],
   updated: false
 };
@@ -24,7 +24,7 @@ function registerReducer(state = initialState, action) {
   switch (type) {
     case SET_IMAGE:
       return {...state, imageSrc: payload};
-    case SET_FORM_DATA:
+    case REGISTER_DATA:
       const { currentuser,allUsers } = payload.data
       return {...state, ...currentuser,allUsers, updated: true};
     case ALL_USERS:{

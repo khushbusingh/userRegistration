@@ -39,11 +39,10 @@ const Sliders = props => {
     centeredSlides={true}
     loop={true}
     slidesPerView={"auto"}
-     centeredSlides={true}
-     autoplay={{
-       delay: 100,
-       disableOnInteraction: false,
-     }}
+    // autoplay={{
+    //    delay: 100,
+    //    disableOnInteraction: false,
+    //  }}
      coverflowEffect={{
       rotate: 1,
       stretch: 1,
@@ -58,27 +57,28 @@ const Sliders = props => {
      className="swiper_container"
    >
         {sliderData.map((slide, index) => {
-          let { qrCode, avatarImg, name, email, designation } = slide;
+          let { qrCode, photo, name, email, designation } = slide;
           return (
             <SwiperSlide>
               <div key={index} className="carousel-details-slider-1" onClick={() => setSlideClick(index)}>
-                <MDBContainer className="my-5 carousel-details-card-1">
-                  <MDBRow className="text-center">
+                <MDBContainer className="my-5 carousel-details-card-1 my-5-slider">
+                  <MDBRow className="text-center carousel-text-center">
                     <MDBCol>
-                      <MDBCard className="testimonial-slide-card-1">
+                      <MDBCard id="testimonial-slide-card-1">
                         <div className="avatar-1 mx-auto bg-white">
                           <MDBCardImage
-                            src={avatarImg}
+                            src={`data:image/png;base64,${photo}`}
                             className="rounded-circle img-fluid"
                           />
                         </div>
-                        <hr />
-                        <MDBCardBody>
+                      
+
+                        <MDBCardBody className="carousel-body-slider" >
                           <div className="card mb-3 qr-card-1">
-                            <div className="row g-0">
+                            <div className="row g-0 slider-g-0">
                               <div className="col-md-4">
                                 <img
-                                  src={qrCode}
+                                  src={`data:image/png;base64,${qrCode}`}
                                   alt="QR Code"
                                   className="img-fluid rounded-start"
                                 />

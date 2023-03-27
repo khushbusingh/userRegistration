@@ -1,6 +1,6 @@
 import {
   SET_IMAGE,
-  SET_FORM_DATA,
+  REGISTER_DATA,
   ALL_USERS,
   SET_SLIDE_DATA
 } from "./types";
@@ -47,7 +47,7 @@ export const registerUser = (payload) => async (dispatch) =>{
   try {
     const res = await BlockChainApiService.register(payload);
     dispatch({
-      type: SET_FORM_DATA,
+      type: REGISTER_DATA,
       payload: res.data,
     });
 
