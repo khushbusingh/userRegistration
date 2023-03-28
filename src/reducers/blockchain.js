@@ -13,7 +13,7 @@ const initialState = {
   email: "xyz@xyz.com", 
   designation: "xyz", 
   qrCode: sampleBaseQrCode,
-  photo: sampleBase64Img,
+  avatarImg: sampleBase64Img,
   allUsers: [],
   updated: false
 };
@@ -25,11 +25,11 @@ function registerReducer(state = initialState, action) {
     case SET_IMAGE:
       return {...state, imageSrc: payload};
     case REGISTER_DATA:
-      const { currentuser,allUsers } = payload.data
-      return {...state, ...currentuser,allUsers, updated: true};
+      const { currentuser,allUsers } = payload.data;
+        return {...state, ...currentuser,allUsers, updated: true};
     case ALL_USERS:{
-      return { ...state, ...payload.data}
-    }
+        return { ...state, ...payload.data}
+     }
     case SET_SLIDE_DATA: {
       const currIndex = payload.index
       const currentIdexData = state.allUsers[currIndex];

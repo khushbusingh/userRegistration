@@ -57,7 +57,8 @@ const Sliders = props => {
      className="swiper_container"
    >
         {sliderData.map((slide, index) => {
-          let { qrCode, photo, name, email, designation } = slide;
+          let { qrCode, avatarImg, name, email, designation } = slide;
+         // let avatarUrl = URL.createObjectURL(avatarImg);
           return (
             <SwiperSlide>
               <div key={index} className="carousel-details-slider-1" onClick={() => setSlideClick(index)}>
@@ -67,7 +68,8 @@ const Sliders = props => {
                       <MDBCard id="testimonial-slide-card-1">
                         <div className="avatar-1 mx-auto bg-white">
                           <MDBCardImage
-                            src={`data:image/png;base64,${photo}`}
+                            src={`data:image/png;base64,${avatarImg}`}
+                            //src= {`${avatarUrl}`}
                             className="rounded-circle img-fluid"
                           />
                         </div>

@@ -12,10 +12,9 @@ import { registerUser } from "../actions/blockchain";
 import "../assets/Avatar.css";
 
 const AvatarDetails = props => {
-  const { blockChain } = props;
+  const { blockChain } = props ;
   const latestUser =  blockChain.updated? blockChain : blockChain.allUsers[0] ;
-  const { name, email, designation, qrCode, photo} = latestUser || blockChain;
-
+  const { name, email, designation, qrCode, avatarImg} = latestUser || blockChain;
 
   return (
     <MDBContainer className="my-5">
@@ -24,7 +23,8 @@ const AvatarDetails = props => {
           <MDBCard className="testimonial-card">
             <div className="avatar mx-auto bg-white">
               <MDBCardImage
-                src={`data:image/png;base64,${photo}`}
+                src={`data:image/png;base64,${avatarImg}`}
+                //src= {`${avatarUrl}`}
                 className="rounded-circle img-fluid"
               />
             </div>
@@ -62,7 +62,7 @@ const AvatarDetails = props => {
 
 const mapStateToProps = (state) => {
   return {
-      blockChain: state.blockChainReducer || {},
+      blockChain: state.blockChainReducer ,
       name: state.blockChainReducer.name
   };
 };
