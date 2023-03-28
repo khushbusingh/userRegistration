@@ -2,8 +2,7 @@ import {
   SET_IMAGE,
   REGISTER_DATA,
   ALL_USERS,
-  SET_SLIDE_DATA,
-  SET_LOADER
+  SET_SLIDE_DATA
 } from "./types";
 
 import BlockChainApiService from "../services/blockchain.service";
@@ -21,16 +20,6 @@ export const getAllUsers = () => async (dispatch) => {
     console.log(err);
   }
 };
-
-export const setLoader = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: SET_LOADER,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
 
 export const setImageData = imageSrc => async (dispatch) =>{
   try {

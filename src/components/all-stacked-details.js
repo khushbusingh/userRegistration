@@ -8,15 +8,18 @@ const  AllUserSlider = (props) => {
   useEffect( () => {
     props.getAllUsers();
   }, []);
-  const { loader } = props.blockChain;
+  const { loader} = props.blockChain;
   return (
-      <>              
-         {loader ?  <div className="loading-spinner"></div>:
-         <Sliders/>}
+    <>
+    {loader ?
+        <div className="loading-spinner">
+        </div>:
+      <Sliders/>
+    }
       </>
-    
   );
 }
+
 
 const mapStateToProps = (state) => {
   return {

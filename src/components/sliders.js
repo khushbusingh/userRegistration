@@ -29,9 +29,9 @@ const Sliders = props => {
   function setSlideClick(index) {
     props.setSlideClick(index)
   }
+  const { loader } = props.blockChain;
 
   return (
-    <>
       <Swiper
       effect={"coverflow"}
     spaceBetween={0}
@@ -58,7 +58,7 @@ const Sliders = props => {
    >
         {sliderData.map((slide, index) => {
           let { qrCode, avatarImg, name, email, designation } = slide;
-         // let avatarUrl = URL.createObjectURL(avatarImg);
+
           return (
             <SwiperSlide>
               <div key={index} className="carousel-details-slider-1" onClick={() => setSlideClick(index)}>
@@ -69,11 +69,9 @@ const Sliders = props => {
                         <div className="avatar-1 mx-auto bg-white">
                           <MDBCardImage
                             src={`data:image/png;base64,${avatarImg}`}
-                            //src= {`${avatarUrl}`}
                             className="rounded-circle img-fluid"
                           />
                         </div>
-                      
 
                         <MDBCardBody className="carousel-body-slider" >
                           <div className="card mb-3 qr-card-1">
@@ -104,7 +102,6 @@ const Sliders = props => {
           );
         })}
       </Swiper>
-    </>
   );
 };
 

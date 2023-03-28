@@ -2,8 +2,7 @@ import {
   SET_IMAGE,
   REGISTER_DATA,
   ALL_USERS,
-  SET_SLIDE_DATA,
-  SET_LOADER
+  SET_SLIDE_DATA
 } from "../actions/types";
 
 
@@ -26,8 +25,6 @@ function registerReducer(state = initialState, action) {
   switch (type) {
     case SET_IMAGE:
       return {...state, imageSrc: payload};
-    case SET_LOADER:
-      return {...state, loader: true};
     case REGISTER_DATA:
       const { currentUser } = payload.data;
       const currAllUsers = state.allUsers;
