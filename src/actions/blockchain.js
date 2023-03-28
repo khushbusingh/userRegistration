@@ -51,8 +51,9 @@ export const registerUser = (payload) => async (dispatch) =>{
       payload: res.data,
     });
 
-    return Promise.resolve(res.data);
+    //return Promise.resolve(res.data);
   } catch (err) {
-    return Promise.reject(err);
+    console.log(err);
+   // return Promise.reject(err);
   }
 }

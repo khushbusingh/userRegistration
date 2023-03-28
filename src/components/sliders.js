@@ -39,10 +39,10 @@ const Sliders = props => {
     centeredSlides={true}
     loop={true}
     slidesPerView={"auto"}
-    // autoplay={{
-    //    delay: 100,
-    //    disableOnInteraction: false,
-    //  }}
+    autoplay={{
+       delay: 100,
+       disableOnInteraction: false,
+     }}
      coverflowEffect={{
       rotate: 1,
       stretch: 1,

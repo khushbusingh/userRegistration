@@ -25,8 +25,8 @@ function registerReducer(state = initialState, action) {
     case SET_IMAGE:
       return {...state, imageSrc: payload};
     case REGISTER_DATA:
-      const { currentuser,allUsers } = payload.data;
-        return {...state, ...currentuser,allUsers, updated: true};
+      const { currentUser,allUsers } = payload.data;
+        return {...state, ...currentUser,allUsers, updated: true};
     case ALL_USERS:{
         return { ...state, ...payload.data}
      }

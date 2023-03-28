@@ -75,6 +75,30 @@ async function getUserImage(){
   return { currentUser, allUsers};
 }
 
+function noramalizeUserResp({allDetails, imageDetails, selectedUser} ){
+  let allUsers = [];
+  let currentUser = {};
+  allDetails.map(currentDetail => {
+    const { name, email, designation, qrcode, photo, id} = currentDetail;
+    const { data } = imageDetails.find( img => img.id == photo) || {};
+    let avatarImg = data ? data.toString('base64') : "";
+    let user = {
+      name,
+      email,
+      designation,
+      qrCode:qrcode,
+      avatarImg
+    }
+    allUsers.push(user);
+  });
+  if(!selectedUser){
+    currentUser = allUsers[0];
+  } else {
+    allUsers.unshift(currentUser);
+  }
+  return { currentUser, allUsers};
+}
+
 app.post('/api/register', async (req, res) => {
   try{
   
@@ -94,13 +118,15 @@ app.post('/api/register', async (req, res) => {
   const registerResp = await axios.post(`${API_ADDRESS}/ada/employee`,addData);
   
   //Get Details of all employee
+  await new Promise(r => setTimeout(r, 2000));
   const getImgResp = await getUserImage();
 
   const { employee_id } = registerResp.data;
+  await new Promise(r => setTimeout(r, 2000));
   let allEmpResp = await axios.get(`${API_ADDRESS}/ada/get_all_employees`);
-  const {allUsers, currentUser }= noramalizeUserResp({allDetails: allEmpResp.data, imageDetails: getImgResp, selectedUser: employee_id});
-  console.log(allUsers,currentUser );
-  return res.send({status:"success", data: {allUsers, currentUser }});
+  const {allUsers }= noramalizeUserResp({allDetails: allEmpResp.data, imageDetails: getImgResp});
+  const allUserLen = allUsers.length-1;
+  return res.send({status:"success", data: {allUsers, currentUser : allUsers[allUserLen]}});
 
   } catch(err) {
     console.log(err);
@@ -115,7 +141,6 @@ app.get('/api/getAllUsers', async (req, res) => {
     let allEmpResp = await axios.get(`${API_ADDRESS}/ada/get_all_employees`);
 
     const {allUsers, currentUser }= noramalizeUserResp({allDetails: allEmpResp.data, imageDetails: getImgResp});
-    console.log(allUsers,currentUser )
     return res.send({status:"success", data: {allUsers, currentUser }});
   } catch(err) {
       console.log(err)
