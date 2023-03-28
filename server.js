@@ -47,6 +47,22 @@ async function getUserImage(){
    })
 }
 
+async function getSingleUserImage(id){
+  //simple function to get growth items
+   return new Promise((resolve, reject) => {
+       let query = `SELECT data FROM image_storage where id="${id}";`;
+       db_con.query(query, function (err, result){
+           if (err){
+               console.log("Error while saving user image" + err);
+               reject(err);
+           }
+           resolve(result)
+       })
+   })
+}
+
+
+
  function noramalizeUserResp({allDetails, imageDetails, selectedUser} ){
   let allUsers = [];
   let currentUser = {};
@@ -89,7 +105,11 @@ function noramalizeUserResp({allDetails, imageDetails, selectedUser} ){
       qrCode:qrcode,
       avatarImg
     }
+    if(selectedUser){
+      currentUser = user;
+    }else {
     allUsers.push(user);
+    }
   });
   if(!selectedUser){
     currentUser = allUsers[0];
@@ -108,7 +128,6 @@ app.post('/api/register', async (req, res) => {
   const usesrUuid = uuid.v4();
 
   const photoBlob = buff.toString();
-// form_data.append("photo", buff.toString(), "image.png" );
  
   //Store image into Db
   const saveImgResp = await saveUserImage(usesrUuid, buff);
@@ -118,15 +137,19 @@ app.post('/api/register', async (req, res) => {
   const registerResp = await axios.post(`${API_ADDRESS}/ada/employee`,addData);
   
   //Get Details of all employee
-  await new Promise(r => setTimeout(r, 2000));
-  const getImgResp = await getUserImage();
-
   const { employee_id } = registerResp.data;
-  await new Promise(r => setTimeout(r, 2000));
-  let allEmpResp = await axios.get(`${API_ADDRESS}/ada/get_all_employees`);
-  const {allUsers }= noramalizeUserResp({allDetails: allEmpResp.data, imageDetails: getImgResp});
-  const allUserLen = allUsers.length-1;
-  return res.send({status:"success", data: {allUsers, currentUser : allUsers[allUserLen]}});
+  
+  await new Promise(r => setTimeout(r, 5000));
+  let singleEmpResp = await axios.get(`${API_ADDRESS}/ada/employee/${employee_id}`);
+  
+  const singleImageResp = await getSingleUserImage(singleEmpResp.data.photo);
+
+  let avatarImg = singleImageResp[0] ? singleImageResp[0].data.toString('base64') : "";
+  const currentUser = {
+    ...singleEmpResp.data,
+    avatarImg
+  }
+  return res.send({status:"success", data: { currentUser}});
 
   } catch(err) {
     console.log(err);

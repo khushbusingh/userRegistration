@@ -25,8 +25,10 @@ function registerReducer(state = initialState, action) {
     case SET_IMAGE:
       return {...state, imageSrc: payload};
     case REGISTER_DATA:
-      const { currentUser,allUsers } = payload.data;
-        return {...state, ...currentUser,allUsers, updated: true};
+      const { currentUser } = payload.data;
+      const currAllUsers = state.allUsers;
+      currAllUsers.unshift(currentUser)
+        return {...state, ...currentUser,allUsers:currAllUsers , updated: true};
     case ALL_USERS:{
         return { ...state, ...payload.data}
      }
