@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import { connect } from "react-redux";
-import { registerUser } from "../actions/blockchain";
+import { registerUser, setLoader } from "../actions/blockchain";
 import UploadPhoto from './upload-photo';
 import "../assets/Login.css";
 
@@ -35,6 +35,7 @@ const RegistrationForm = (props) => {
                 setSubmitError('Please enter all details');
             } else {
                 setSubmitError(null);
+                props.setLoader();
                 props.registerUser({name,email,designation,imageSrc});
                 setName('');
                 setEmail('');
@@ -77,5 +78,6 @@ const mapStateToProps = (state) => {
   };
 
 export default connect(mapStateToProps, {
-    registerUser
+    registerUser,
+    setLoader
 })(RegistrationForm);

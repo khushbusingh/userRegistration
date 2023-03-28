@@ -2,20 +2,22 @@ import {
   SET_IMAGE,
   REGISTER_DATA,
   ALL_USERS,
-  SET_SLIDE_DATA
+  SET_SLIDE_DATA,
+  SET_LOADER
 } from "../actions/types";
 
 
 import { sampleBase64Img, sampleBaseQrCode } from "../constants/constData";
 
 const initialState = {
-  name: "xyz", 
-  email: "xyz@xyz.com", 
-  designation: "xyz", 
+  name: "Name", 
+  email: "Email Id", 
+  designation: "Designation", 
   qrCode: sampleBaseQrCode,
   avatarImg: sampleBase64Img,
   allUsers: [],
-  updated: false
+  updated: false,
+  loader: true
 };
 
 function registerReducer(state = initialState, action) {
@@ -24,18 +26,20 @@ function registerReducer(state = initialState, action) {
   switch (type) {
     case SET_IMAGE:
       return {...state, imageSrc: payload};
+    case SET_LOADER:
+      return {...state, loader: true};
     case REGISTER_DATA:
       const { currentUser } = payload.data;
       const currAllUsers = state.allUsers;
       currAllUsers.unshift(currentUser)
-        return {...state, ...currentUser,allUsers:currAllUsers , updated: true};
+        return {...state, ...currentUser,allUsers:currAllUsers , updated: true, loader:false};
     case ALL_USERS:{
-        return { ...state, ...payload.data}
+        return { ...state, ...payload.data, loader:false}
      }
     case SET_SLIDE_DATA: {
       const currIndex = payload.index
       const currentIdexData = state.allUsers[currIndex];
-      return {...state, ...currentIdexData, updated: true};
+      return {...state, ...currentIdexData, updated: true, loader:false};
     }
     default:
       return state;
